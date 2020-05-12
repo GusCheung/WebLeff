@@ -1,0 +1,284 @@
+.tabs-container {
+    /*margin: 5px;*/
+    overflow: hidden;
+    position: relative;
+    background: #f3f3f4;
+    display: block !important;
+}
+
+.tabs-header {
+    height: 34px;
+    line-height: 32px;
+    position: relative;
+    background: #f3f3f4;
+    /*border-bottom: 3px solid #fff;*/
+}
+
+.tabs-panels {
+    height: calc(100% - 34px) !important;
+    background: #fff;
+    padding: 5px;
+    overflow: hidden;
+    font-size: 15px;
+}
+
+    .tabs-panels .tabs-panel {
+        display: none;
+        /*padding: 10px;*/
+        position: relative;
+        height: 100%;
+        margin:0;
+    }
+
+    .tabs-panels .tabs-panel-iframe {
+        /*position: absolute;*/
+        width: 100%;
+        height: 100%;
+        /*left: 5px;
+        top: 5px;
+        right: 5px;
+        bottom: 5px;*/
+    }
+
+    .tabs-panels .selected-panel {
+        display: block !important;
+    }
+
+.tabs-wrapper {
+    overflow: hidden;
+    position: relative;
+    height: 34px;
+    width: 100%;
+    border-bottom: 2px solid #2F4050;
+}
+
+.tabs-wrapper-scroll {
+    margin: 0 36px !important;
+}
+
+.tabs-wrapper ul {
+    position: absolute;
+    height: 32px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    font-size: 0;
+    list-style: none;
+    padding: 0 5px;
+    margin: 0;
+}
+
+    .tabs-wrapper ul > li {
+        height: 100%;
+        display: inline-block;
+        font-size: 14px;
+        width: 130px;
+        background: #f3f3f4;
+        position: relative;
+        text-align: left;
+        vertical-align: middle;
+        z-index: 10;
+        /*transition: all .45s;*/
+        cursor: pointer;
+    }
+
+        .tabs-wrapper ul > li:hover {
+            z-index: 20;
+            background: #e4e4e4;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .tabs-wrapper ul > li > div {
+            padding: 0 20px 0 10px;
+            position: relative;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .tabs-wrapper ul > li .icon {
+            margin-right: 6px;
+        }
+
+        .tabs-wrapper ul > li > div::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 6px;
+            height: 20px;
+            width: .05em;
+            background: #999c9e;
+        }
+
+        .tabs-wrapper ul > li:first-child > div::before {
+            width: 0 !important;
+        }
+
+        .tabs-wrapper ul > li::before,
+        .tabs-wrapper ul > li::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 0;
+            width: 8px;
+            height: 8px;
+            z-index: 20;
+        }
+
+        .tabs-wrapper ul > li::after {
+            right: -8px;
+        }
+
+        .tabs-wrapper ul > li::before {
+            left: -8px;
+        }
+
+.tabs-wrapper .selected::after {
+    background: -webkit-radial-gradient(top right, transparent 8px, #2F4050 8px) !important;
+    background: -o-radial-gradient(top right, transparent 8px, #2F4050 8px) !important;
+    background: -moz-radial-gradient(top right, transparent 8px, #2F4050 8px) !important;
+    background: radial-gradient(top right, transparent 8px, #2F4050 8px) !important;
+}
+
+
+.tabs-wrapper ul > li:hover::after {
+    background: -webkit-radial-gradient(top right, transparent 8px, #e4e4e4 8px);
+    background: -o-radial-gradient(top right, transparent 8px, #e4e4e4 8px);
+    background: -moz-radial-gradient(top right, transparent 8px, #e4e4e4 8px);
+    background: radial-gradient(top right, transparent 8px, #e4e4e4 8px);
+}
+
+.tabs-wrapper .selected::before {
+    background: -webkit-radial-gradient(top left, transparent 8px, #2F4050 8px) !important;
+    background: -o-radial-gradient(top left, transparent 8px, #2F4050 8px) !important;
+    background: -moz-radial-gradient(top left, transparent 8px, #2F4050 8px) !important;
+    background: radial-gradient(top left, transparent 8px, #2F4050 8px) !important;
+}
+
+
+.tabs-wrapper ul > li:hover::before {
+    background: -webkit-radial-gradient(top left, transparent 8px, #e4e4e4 8px);
+    background: -o-radial-gradient(top left, transparent 8px, #e4e4e4 8px);
+    background: -moz-radial-gradient(top left, transparent 8px, #e4e4e4 8px);
+    background: radial-gradient(top left, transparent 8px, #e4e4e4 8px);
+}
+
+.tabs-wrapper .selected {
+    background: #2F4050 !important;
+    color: #fff;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    z-index: 30;
+}
+
+    .tabs-wrapper ul > li > div:hover::before,
+    .tabs-wrapper ul > li:hover + li > div::before,
+    .tabs-wrapper .selected > div::before,
+    .tabs-wrapper .selected + li > div::before {
+        display: none;
+    }
+
+
+/*************
+     ** 图标
+     *************/
+.tabs-wrapper .tab_close {
+    vertical-align: middle;
+    display: inline-block;
+    transform: all 0.55s;
+    width: 16px;
+    height: 16px;
+    background: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+    position: absolute;
+    right: 5px;
+    top: 8px;
+    transition: all 0.45s;
+}
+
+    .tabs-wrapper .tab_close::before,
+    .tabs-wrapper .tab_close::after {
+        content: '';
+        position: absolute;
+        height: 2px;
+        width: 12px;
+        top: 50%;
+        left: 1.5px;
+        margin-top: -1px;
+        border-radius: 30%;
+        background: #999C9E;
+    }
+
+    .tabs-wrapper .tab_close::before {
+        transform: rotate(45deg);
+    }
+
+    .tabs-wrapper .tab_close::after {
+        transform: rotate(-45deg);
+    }
+
+    .tabs-wrapper .tab_close:hover {
+        background: #ccc;
+    }
+    .tabs-wrapper .tab_close:hover::before,
+    .tabs-wrapper .tab_close:hover::after {
+       background: #2F4050;
+    }
+.tabs-wrapper .selected .tab_close::before,
+.tabs-wrapper .selected .tab_close::after{
+    background: #fff;
+}
+.tabs-wrapper .selected .tab_close:hover::before,
+.tabs-wrapper .selected .tab_close:hover::after{
+    background: #2F4050;
+}
+.tabs-header .tab-scroll-right,
+.tabs-header .tab-scroll-left {
+    position: absolute;
+    top: 2px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    transition: all 0.75s;
+    background: transparent;
+    cursor: pointer;
+    display: none;
+}
+
+.tabs-header .tab-scroll-left {
+    left: 4px;
+}
+
+.tabs-header .tab-scroll-right {
+    right: 4px;
+}
+
+    .tabs-header .tab-scroll-right:hover,
+    .tabs-header .tab-scroll-left:hover {
+        background: #e4e4e4;
+    }
+
+    .tabs-header .tab-scroll-right::before,
+    .tabs-header .tab-scroll-left::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 6px;
+        width: 0;
+        height: 0;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+    }
+
+.tabs-header .tab-scroll-left::before {
+    left: 8px;
+    border-right: 8px solid #666a6d;
+}
+
+.tabs-header .tab-scroll-right::before {
+    right: 8px;
+    border-left: 8px solid #666a6d;
+}
