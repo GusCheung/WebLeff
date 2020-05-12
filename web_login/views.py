@@ -16,39 +16,7 @@ import requests
 # *----------------------登录函数----------------------*
 def login(request):
         if request.method == 'GET':
-            try:
-                code = request.Get.get('code',)
-                state = request.Get.get('state',)
-                appId = 'dingoaebcajmgx7n5zqbym'
-                appSecret = 'LY149e6_fDQRthXGziFA2Z9WwU5dIFFJwfq1BdUxbikkNlgkzS8h7WD_F-kSijqj'
-
-                token = requests.get(f'https://oapi.dingtalk.com/sns/gettoken?appid={appId}&appsecret={appSecret}')
-                access_token = token.json()["access_token"]
-                tmp_auth_code = requests.post(f"https://oapi.dingtalk.com/sns/get_persistent_code?access_token={access_token}",
-                                              json={
-                                                  "tmp_auth_code": code
-                                              })
-                tmp_code = tmp_auth_code.json()
-                print(tmp_code)
-                openid = tmp_code['openid']
-                persistent_code = tmp_code['persistent_code']
-
-                sns_token_request = requests.post(f"https://oapi.dingtalk.com/sns/get_sns_token?access_token={access_token}",
-                                                  json={
-                                                      "openid": openid,
-                                                      "persistent_code": persistent_code
-                                                  })
-                # userAgent = request.META['HTTP_USER_AGENT']  # 访问的设备信息
-                sns_token = sns_token_request.json()['sns_token']
-
-                user_info_request = requests.get(f'https://oapi.dingtalk.com/sns/getuserinfo?sns_token={sns_token}')
-
-                user_info = user_info_request.json()['user_info']
-                print(user_info)
-                return redirect('../index')
-            except:  # 异常报错 没有找用户
-                return render(request, 'login.html')
-
+            return render(request, 'login.html')
         if request.method == 'POST':
             login_info = request.POST
             userName = login_info.get('user', None)  # 用户
@@ -79,6 +47,17 @@ def login(request):
                     except:  # 异常报错 没有找用户
                         messages.success(request, '用户不存在')
                         return render(request, 'login.html')
+
+
+# *----------------------登录函数----------------------*
+def ding_login(request):
+    appid = 'dingoaebcajmgx7n5zqbym'
+    redirect_uri = 'http://www.myleff.com:3200/'
+    return redirect(
+        'https://oapi.dingtalk.com/connect/qrconnect?appid=' + appid + '&response_type=code&scope=snsapi_login&state'
+                                                                       '=STATE&redirect_uri=' + redirect_uri)
+
+
 
 @csrf_exempt
 # *----------------------主页函数----------------------*
