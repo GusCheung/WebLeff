@@ -11,5 +11,5 @@ import datetime
 from django.contrib import messages
 
 
-def report(request):
-    return HttpResponse("报表页")
+def store(request):
+    return HttpResponse("商店页")

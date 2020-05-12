@@ -37,7 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'web_login',
+    'web_login',   # 登录/主页
+    'web_report',  # 报表
+    'web_store',  # 内购
+    'web_commodity_info',  # 商品信息
+    'web_IT_info',  # IT信息
 ]
 
 MIDDLEWARE = [
@@ -51,7 +55,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'webleff.urls'
-SESSION_COOKIE_AGE = 60 * 60  # 3小时 session失效 60s*60m
+SESSION_COOKIE_AGE = 60 * 60  # 1小时 session失效 60s*60m
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_SAVE_EVERY_REQUEST = True
 TEMPLATES = [

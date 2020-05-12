@@ -20,5 +20,8 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path("favicon.ico", RedirectView.as_view(url='static/favicon.ico')),
     path('', include('web_login.urls')),
-
+    path('report', include('web_report.urls')),  # 报表URL 3200/report
+    path('store', include('web_store.urls')),  # 报表URL 3200/store
+    path('commodity_info', include('web_commodity_info.urls')),  # 报表URL 3200/store
+    path('IT_info', include('web_IT_info.urls')),  # 报表URL 3200/store
 ]
