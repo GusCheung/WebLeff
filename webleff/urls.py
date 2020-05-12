@@ -20,4 +20,5 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path("favicon.ico", RedirectView.as_view(url='static/favicon.ico')),
     path('', include('web_login.urls')),
+
 ]
