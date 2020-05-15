@@ -1,16 +1,17 @@
 import time
-
 from django.shortcuts import render
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, reverse
 import hashlib  # MD5解密
 
 from django.views.decorators.csrf import csrf_exempt
+from dingtalk.client import SecretClient
+from dingtalk.storage.kvstorage import KvStorage
+
 
 from web_login.models import Xtyh, WebLogin
 import datetime
 from django.contrib import messages
-
 import hmac
 import base64
 from hashlib import sha256
@@ -57,94 +58,51 @@ def login(request):
                         return render(request, 'login.html')
 
 
-# *----------------------登录函数----------------------*
-# def ding_login(request):
-#     appid = 'dingoaebcajmgx7n5zqbym'
-#     redirect_uri = 'https://www.myleff.com:3200/index'
-#
-#     # 获取code
-#     code = request.GET.get("code")
-#     t = time.time()
-#     # 时间戳
-#     timestamp = str((int(round(t * 1000))))
-#     appSecret = 'LY149e6_fDQRthXGziFA2Z9WwU5dIFFJwfq1BdUxbikkNlgkzS8h7WD_F-kSijqj'
-#     # 构造签名
-#     signature = base64.b64encode(
-#         hmac.new(appSecret.encode('utf-8'), timestamp.encode('utf-8'), digestmod=sha256).digest())
-#     # 请求接口，换取钉钉用户名
-#     payload = {'tmp_auth_code': code}
-#     headers = {'Content-Type': 'application/json'}
-#     # parse（alt+回车 第二个 导包）
-#     res = requests.post('https://oapi.dingtalk.com/sns/getuserinfo_bycode?signature=' + urllib.parse.quote(
-#         signature.decode("utf-8")) + "&timestamp=" + timestamp + "&accessKey=dingoadckiwhdceemaxrza",
-#                         data=json.dumps(payload), headers=headers)
-#     res_dict = json.loads(res.text)
-#     # 进行跳转
-#     print(res_dict)
-#     return redirect("http://www.myleff.com:3200/index")
+#构造钉钉登录url
 def ding_login(request):
-    code = request.GET.get('code','')
-    print(code)
-
-    return HttpResponse('code的值')
-    # if request.method == 'GET':
-    #     """登录验证"""
-    #     ##########二维码认证登录#############
-    #     code = request.GET.get('code', '')
-    #     appId = 'dingoaebcajmgx7n5zqbym	'
-    #     appSecret = 'LY149e6_fDQRthXGziFA2Z9WwU5dIFFJwfq1BdUxbikkNlgkzS8h7WD_F-kSijqj'
-    #     'https: // oapi.dingtalk.com / sns / getuserinfo_bycode?accessKey = xxx & timestamp = xxx & signature = xxx'
-    #     token = requests.get(
-    #         'https://oapi.dingtalk.com/sns/gettoken?appid={appId}&appsecret={appSecret}'.format(appId=appId,
-    #                                                                                             appSecret=appSecret))
-    #     access_token = token.json()["access_token"]
-    #
-    #     tmp_auth_code = requests.post(
-    #         "https://oapi.dingtalk.com/sns/get_persistent_code?access_token={access_token}".format(
-    #             access_token=access_token),
-    #         json={
-    #             "tmp_auth_code": code
-    #         })
-    #     tmp_code = tmp_auth_code.json()
-    #     print(tmp_code)
-    #     openid = tmp_code['openid']
-    #     persistent_code = tmp_code['persistent_code']
-    #     sns_token_request = requests.post(
-    #         "https://oapi.dingtalk.com/sns/get_sns_token?access_token={access_token}".format(
-    #             access_token=access_token),
-    #         json={
-    #             "openid": openid,
-    #             "persistent_code": persistent_code
-    #         })
-    #
-    #     sns_token = sns_token_request.json()['sns_token']
-    #
-    #     user_info_request = requests.get(
-    #         'https://oapi.dingtalk.com/sns/getuserinfo?sns_token={sns_token}'.format(sns_token=sns_token))
-    #
-    #     user_info = user_info_request.json()['user_info']
-    #     unionid = user_info.get('unionid')
-    #     print('ceshi')
-    #     print(unionid)
-    #     # user_obj = UserInfo.objects.filter(unionid=unionid).first()
-    #     # request.session['username'] = user_obj.username  # 登录成功后，用户登录信息存>放于session
-    #     # request.session.set_expiry(86400)  # 设置登录过期时间
-    #     content = {'code': 0,
-    #                'msg': 'success',
-    #                'user_info': {
-    #                    'user_id': unionid,
-    #                }
-    #                }
-    #     ####################################
-    #     content = {'code': 0, 'msg': 'success', }
-    #     return JsonResponse(data=content, status=status.HTTP_200_OK)
+    appid = 'dingoaebcajmgx7n5zqbym'
+    redirect_uri = 'http://www.myleff.com:3200/index'
+    return redirect(
+        'https://oapi.dingtalk.com/connect/qrconnect?appid=' + appid + '&response_type=code&scope=snsapi_login&state'
+                                                                       '=STATE&redirect_uri=' + redirect_uri)
 
 
 
 @csrf_exempt
 # *----------------------主页函数----------------------*
 def index(request):
-    return render(request, 'index.html')
+    # 获取code
+    code = request.GET.get("code")
+    print(code)
+    t = time.time()
+    # 时间戳
+    timestamp = str((int(round(t * 1000))))
+    # 密钥
+    appSecret = 'LY149e6_fDQRthXGziFA2Z9WwU5dIFFJwfq1BdUxbikkNlgkzS8h7WD_F-kSijqj'
+    # 构造签名
+    signature = base64.b64encode(
+        hmac.new(appSecret.encode('utf-8'), timestamp.encode('utf-8'), digestmod=sha256).digest())
+    # 请求接口，换取钉钉用户名
+    payload = {'tmp_auth_code': code}
+    headers = {'Content-Type': 'application/json'}
+    # parse（alt+回车 第二个 导包）
+    res = requests.post('https://oapi.dingtalk.com/sns/getuserinfo_bycode?signature=' + urllib.parse.quote(
+        signature.decode("utf-8")) + "&timestamp=" + timestamp + "&accessKey=dingoaebcajmgx7n5zqbym",
+                        data=json.dumps(payload), headers=headers)
+    res_dict = json.loads(res.text)
+    unionid = res_dict['user_info']['unionid']
+    ding_client = SecretClient(
+        corp_id="ding2rg88cio3ddi3zqv",
+        corp_secret="bYD8yjG6Od4lURcHFDaVRHzcP3DdXI_WaRoH0Xnzllw1WhzFET4mfyibzdckcyWk")
+    # 获取userid
+    userid = ding_client.user.get_userid_by_unionid(unionid)
+    userid = userid['userid']
+    # 获取用户详情信息
+    userget = ding_client.user.get(userid)
+    # 获取头像url
+    avatar = userget['avatar']
+    # 进行跳转
+    return render(request, 'index.html', {''})
 
 
 # *----------------------注销----------------------*
