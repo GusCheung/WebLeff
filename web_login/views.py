@@ -71,38 +71,40 @@ def ding_login(request):
 @csrf_exempt
 # *----------------------主页函数----------------------*
 def index(request):
-    # 获取code
-    code = request.GET.get("code")
-    print(code)
-    t = time.time()
-    # 时间戳
-    timestamp = str((int(round(t * 1000))))
-    # 密钥
-    appSecret = 'LY149e6_fDQRthXGziFA2Z9WwU5dIFFJwfq1BdUxbikkNlgkzS8h7WD_F-kSijqj'
-    # 构造签名
-    signature = base64.b64encode(
-        hmac.new(appSecret.encode('utf-8'), timestamp.encode('utf-8'), digestmod=sha256).digest())
-    # 请求接口，换取钉钉用户名
-    payload = {'tmp_auth_code': code}
-    headers = {'Content-Type': 'application/json'}
-    # parse（alt+回车 第二个 导包）
-    res = requests.post('https://oapi.dingtalk.com/sns/getuserinfo_bycode?signature=' + urllib.parse.quote(
-        signature.decode("utf-8")) + "&timestamp=" + timestamp + "&accessKey=dingoaebcajmgx7n5zqbym",
-                        data=json.dumps(payload), headers=headers)
-    res_dict = json.loads(res.text)
-    unionid = res_dict['user_info']['unionid']
-    ding_client = SecretClient(
-        corp_id="ding2rg88cio3ddi3zqv",
-        corp_secret="bYD8yjG6Od4lURcHFDaVRHzcP3DdXI_WaRoH0Xnzllw1WhzFET4mfyibzdckcyWk")
-    # 获取userid
-    userid = ding_client.user.get_userid_by_unionid(unionid)
-    userid = userid['userid']
-    # 获取用户详情信息
-    userget = ding_client.user.get(userid)
-    # 获取头像url
-    avatar = userget['avatar']
-    # 进行跳转
-    return render(request, 'index.html', {''})
+    if request.method == 'POST':
+        # 获取code
+        code = request.GET.get("code")
+        print(code)
+        t = time.time()
+        # 时间戳
+        timestamp = str((int(round(t * 1000))))
+        # 密钥
+        appSecret = 'LY149e6_fDQRthXGziFA2Z9WwU5dIFFJwfq1BdUxbikkNlgkzS8h7WD_F-kSijqj'
+        # 构造签名
+        signature = base64.b64encode(
+            hmac.new(appSecret.encode('utf-8'), timestamp.encode('utf-8'), digestmod=sha256).digest())
+        # 请求接口，换取钉钉用户名
+        payload = {'tmp_auth_code': code}
+        headers = {'Content-Type': 'application/json'}
+        # parse（alt+回车 第二个 导包）
+        res = requests.post('https://oapi.dingtalk.com/sns/getuserinfo_bycode?signature=' + urllib.parse.quote(
+            signature.decode("utf-8")) + "&timestamp=" + timestamp + "&accessKey=dingoaebcajmgx7n5zqbym",
+                            data=json.dumps(payload), headers=headers)
+        res_dict = json.loads(res.text)
+        unionid = res_dict['user_info']['unionid']
+        ding_client = SecretClient(
+            corp_id="ding2rg88cio3ddi3zqv",
+            corp_secret="bYD8yjG6Od4lURcHFDaVRHzcP3DdXI_WaRoH0Xnzllw1WhzFET4mfyibzdckcyWk")
+        # 获取userid
+        userid = ding_client.user.get_userid_by_unionid(unionid)
+        userid = userid['userid']
+        # 获取用户详情信息
+        userget = ding_client.user.get(userid)
+        # 获取头像url
+        avatar = userget['avatar']
+        # 进行跳转
+        return render(request, 'index.html')
+    return render(request, 'index.html')
 
 
 # *----------------------注销----------------------*
