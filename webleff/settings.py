@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'web_store',  # 内购
     'web_commodity_info',  # 商品信息
     'web_IT_info',  # IT信息
+    'web_NA_info_s',  # 网络地址信息
 ]
 
 MIDDLEWARE = [

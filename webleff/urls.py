@@ -24,4 +24,5 @@ urlpatterns = [
     path('store', include('web_store.urls')),  # 报表URL 3200/store
     path('commodity_info', include('web_commodity_info.urls')),  # 报表URL 3200/store
     path('IT_info', include('web_IT_info.urls')),  # 报表URL 3200/store
+    path('NA_info_S', include('web_IT_info.urls')),  # 报表URL 3200/store
 ]

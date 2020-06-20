@@ -7,5 +7,4 @@ urlpatterns = [
     path('user_logout', user_logout, name='user_logout'),
     url(r'^ding_login/?', ding_login),
 
-
 ]
