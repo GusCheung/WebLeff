@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -86,8 +85,8 @@ DATABASES = {
         'ENGINE': 'sql_server.pyodbc',  # 数据库引擎设置
         'NAME': 'leff',  # 要连接的数据库名
         'USER': 'sa',  # 数据库用户名
-        'PASSWORD': 'zgs155478',  # 数据库密码
-        'HOST': '192.168.100.88',  # 数据库主机地址
+        'PASSWORD': 'Laifu2017@',  # 数据库密码
+        'HOST': '192.168.100.18',  # 数据库主机地址
         'PORT': '',  # 数据库端口号，默认可以不写
         'OPTIONS': {
             'driver': 'SQL Server Native Client 10.0',

@@ -1,0 +1,670 @@
+<!--<!DOCTYPE html>-->
+<html>
+
+<head>
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <meta content="width=device-width,initial-scale=1.0,maxinmum-scale=1.0,user-scalable=0" name="viewport">-->
+<!--  手机自适应  -->
+<!--    <meta name="keywords" content="公司网络地址/电话表/宽带表">-->
+<!--    seo引擎-->
+    <title>IT资产</title>
+
+    <meta charset="utf-8">
+
+    <meta name='description' content="公司网络地址/电话表/宽带表">
+    <meta name=”renderer” content=”webkit”/>
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <META HTTP-EQUIV="expires" CONTENT="0"><meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+    <meta http-equiv="charset" content="iso-8859-1">
+    <meta http-equiv="expires" content="31 Dec 2008">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/static/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/tabStyle.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+
+
+
+
+</head>
+<body class="pace-done mini-navbar">
+    <div id="wrapper" >
+        {% if lc设备 == '电脑端' %}
+        <div id=""  class="gray-bg">
+        {% else %}
+        <div id="page-wrapper"  class="gray-bg">
+        {% endif %}
+        <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            {% if lc提示 == '请在搜索框中输入资产编号！' %}
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="input-group">
+                                <select class="form-control m-b" name="account" id="area">
+                                    <option value="选择区域" selected>选择区域</option>
+                                    <option value="ZB" >花都总部</option>
+                                    <option value="BY" >白云运营</option>
+                                    <option value="XX" >线下实体</option>
+                                </select>
+                                <strong style="width:5px"></strong>
+                                <select class="form-control m-b" name="account" id="type">
+                                    <option value="选择类型" selected>选择类型</option>
+                                    <option value="BJB" >笔记本</option>
+                                    <option value="TSJ" >台式主机</option>
+                                    <option value="XSQ" >显示器</option>
+                                    <option value="YTJ" >电脑投影一体机</option>
+
+                                    <option value="DSJ" >电视机</option>
+                                    <option value="FWQ" >服务器</option>
+                                    <option value="FYJ" >复印机</option>
+                                    <option value="JKZ" >监控主机</option>
+
+                                    <option value="KQJ" >考勤机</option>
+                                    <option value="SXT" >摄像头</option>
+                                    <option value="SYJ" >摄影器材</option>
+                                    <option value="TYY" >投影仪</option>
+                                    <option value="WLSB" >网络设备</option>
+                                    <option value="YXSB" >音响设备</option>
+                                    <option value="QT" >其他设备</option>
+                                </select>
+                                <strong style="width:5px"></strong>
+                              <input type="text" class="form-control" id="text" name="资产编号" placeholder="输入资产编号.....">
+                              <strong style="width:5px"></strong>
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" onclick="return refer()" type="submit">查询</button>
+                              </span>
+                            </div><!-- /input-group -->
+                          </div><!-- /.col-lg-6 -->
+                        </div><!-- /.row -->
+                        </h5>
+                    </div>
+                </div>
+                <h3>
+                <div class="error-desc">
+                    {{lc提示}}
+                    <!-- 占位符 -->
+                    <div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                    </div>
+                </div>
+                </h3>
+            </div>
+            {% else %}
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="input-group">
+                                <select class="form-control m-b" name="account" id="area">
+                                    <option value="选择区域" selected>选择区域</option>
+                                    <option value="ZB" >花都总部</option>
+                                    <option value="BY" >白云运营</option>
+                                    <option value="XX" >线下实体</option>
+                                </select>
+                                <strong style="width:5px"></strong>
+                                <select class="form-control m-b" name="account" id="type">
+                                    <option value="选择类型" selected>选择类型</option>
+                                    <option value="BJB" >笔记本</option>
+                                    <option value="TSJ" >台式主机</option>
+                                    <option value="XSQ" >显示器</option>
+                                    <option value="YTJ" >电脑投影一体机</option>
+
+                                    <option value="DSJ" >电视机</option>
+                                    <option value="FWQ" >服务器</option>
+                                    <option value="FYJ" >复印机</option>
+                                    <option value="JKZ" >监控主机</option>
+
+                                    <option value="KQJ" >考勤机</option>
+                                    <option value="SXT" >摄像头</option>
+                                    <option value="SYJ" >摄影器材</option>
+                                    <option value="TYY" >投影仪</option>
+                                    <option value="WLSB" >网络设备</option>
+                                    <option value="YXSB" >音响设备</option>
+                                    <option value="QT" >其他设备</option>
+                                </select>
+                                <strong style="width:5px"></strong>
+                              <input type="text" class="form-control" id="text" name="资产编号" placeholder="输入资产编号.....">
+                              <strong style="width:5px"></strong>
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" onclick="return refer()" type="submit">查询</button>
+                              </span>
+                            </div><!-- /input-group -->
+                          </div><!-- /.col-lg-6 -->
+                        </div><!-- /.row -->
+                        </h5>
+                    </div>
+                    <ul class="tabs">
+                        <li><a href="#" class="tabs1" name=".tab1_1">IT扫描页</a></li>
+                        <li><a href="#" class="tabs2" name=".tab1_2">IT图表</a></li>
+                    </ul>
+                    <div class="content">
+                        <div class="tab1_1">
+                            <div class="ibox-content">
+                                {% if seek_itzc.资产类型 == '台式主机' or seek_itzc.资产类型 == '笔记本' or seek_itzc.资产类型 == '服务器' %}
+                                    <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                {% if lc设备 == '电脑端' %}
+                                    <th width=300px>#</th>
+                                {% else %}
+                                    <th width=100px>#</th>
+                                {% endif %}
+                                    <th>#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>资产编号</td>
+                                    <td>{{seek_itzc.资产编号}}</td>
+                                </tr>
+                                <tr>
+                                    <td>资产名称</td>
+                                    <td>{{seek_itzc.资产名称}}</td>
+                                </tr>
+                                <tr>
+                                    <td>资产类型</td>
+                                    <td>{{seek_itzc.资产类型}}</td>
+                                </tr>
+                                <tr>
+                                    <td>区域</td>
+                                    <td>{{seek_itzc.区域}}</td>
+                                </tr>
+                                <tr>
+                                    <td>位置</td>
+                                    <td>{{seek_itzc.位置}}</td>
+                                </tr>
+                                <tr>
+                                    <td>使用人</td>
+                                    <td>{{seek_itzc.使用人}}</td>
+                                </tr>
+                                <tr>
+                                    <td>使用状态</td>
+                                    <td>{{seek_itzc.使用状态}}</td>
+                                </tr>
+                                <tr>
+                                    <td>CPU</td>
+                                    <td>{{seek_itzc.cpu}}</td>
+                                </tr>
+                                <tr>
+                                    <td>主板</td>
+                                    <td>{{seek_itzc.主板}}</td>
+                                </tr>
+                                <tr>
+                                    <td>硬盘</td>
+                                    <td>{{seek_itzc.硬盘}}</td>
+                                </tr>
+                                <tr>
+                                    <td>内存</td>
+                                    <td>{{seek_itzc.内存}} (内存插槽：{{seek_itzc.内存插槽}})</td>
+                                </tr>
+                                <tr>
+                                    <td>显卡</td>
+                                    <td>{{seek_itzc.显卡}}</td>
+                                </tr>
+                                <tr>
+                                    <td>IP</td>
+                                    <td>{{seek_itzc.ip}}</td>
+                                </tr>
+                                <tr>
+                                    <td>MAC</td>
+                                    <td>{{seek_itzc.mac}}</td>
+                                </tr>
+                                <tr>
+                                    <td>操作系统</td>
+                                    <td>{{seek_itzc.操作系统}}</td>
+                                </tr>
+                                <tr>
+                                    <td>备注</td>
+                                    <td>{{seek_itzc.备注}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                                {% else %}
+                                    <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                {% if lc设备 == '电脑端' %}
+                                    <th width=300px>#</th>
+                                {% else %}
+                                    <th width=100px>#</th>
+                                {% endif  %}
+                                    <th>#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>资产编号</td>
+                                    <td>{{seek_itzc.资产编号}}</td>
+                                </tr>
+                                <tr>
+                                    <td>资产名称</td>
+                                    <td>{{seek_itzc.资产名称}}</td>
+                                </tr>
+                                <tr>
+                                    <td>资产类型</td>
+                                    <td>{{seek_itzc.资产类型}}</td>
+                                </tr>
+                                <tr>
+                                    <td>区域</td>
+                                    <td>{{seek_itzc.区域}}</td>
+                                </tr>
+                                <tr>
+                                    <td>位置</td>
+                                    <td>{{seek_itzc.位置}}</td>
+                                </tr>
+                                <tr>
+                                    <td>使用人</td>
+                                    <td>{{seek_itzc.使用人}}</td>
+                                </tr>
+                                <tr>
+                                    <td>使用状态</td>
+                                    <td>{{seek_itzc.使用状态}}</td>
+                                </tr>
+                                <tr>
+                                    <td>主板</td>
+                                    <td>{{seek_itzc.主板}}</td>
+                                </tr>
+                                <tr>
+                                    <td>操作系统</td>
+                                    <td>{{seek_itzc.操作系统}}</td>
+                                </tr>
+                                <tr>
+                                    <td>备注</td>
+                                    <td>{{seek_itzc.备注}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                                {% endif %}
+                                {% for seek_itzc in seek_itzc_使用人 %}
+                                {% if seek_itzc.资产类型 == '台式主机' or seek_itzc.资产类型 == '笔记本' %}
+                                    <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                {% if lc设备 == '电脑端' %}
+                                    <th width=300px>此使用人其他设备</th>
+                                {% else %}
+                                    <th width=100px>此使用人其他设备</th>
+                                {% endif  %}
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>资产编号</td>
+                                    <td>{{seek_itzc.资产编号}}</td>
+                                </tr>
+                                <tr>
+                                    <td>资产名称</td>
+                                    <td>{{seek_itzc.资产名称}}</td>
+                                </tr>
+                                <tr>
+                                    <td>资产类型</td>
+                                    <td>{{seek_itzc.资产类型}}</td>
+                                </tr>
+                                <tr>
+                                    <td>区域</td>
+                                    <td>{{seek_itzc.区域}}</td>
+                                </tr>
+                                <tr>
+                                    <td>位置</td>
+                                    <td>{{seek_itzc.位置}}</td>
+                                </tr>
+                                <tr>
+                                    <td>使用人</td>
+                                    <td>{{seek_itzc.使用人}}</td>
+                                </tr>
+                                <tr>
+                                    <td>使用状态</td>
+                                    <td>{{seek_itzc.使用状态}}</td>
+                                </tr>
+                                <tr>
+                                    <td>CPU</td>
+                                    <td>{{seek_itzc.cpu}}</td>
+                                </tr>
+                                <tr>
+                                    <td>主板</td>
+                                    <td>{{seek_itzc.主板}}</td>
+                                </tr>
+                                <tr>
+                                    <td>硬盘</td>
+                                    <td>{{seek_itzc.硬盘}}</td>
+                                </tr>
+                                <tr>
+                                    <td>内存</td>
+                                    <td>{{seek_itzc.内存}}  （内存插槽：{{seek_itzc.内存插槽}}）</td>
+                                </tr>
+                                <tr>
+                                    <td>显卡</td>
+                                    <td>{{seek_itzc.显卡}}</td>
+                                </tr>
+                                <tr>
+                                    <td>IP</td>
+                                    <td>{{seek_itzc.ip}}</td>
+                                </tr>
+                                <tr>
+                                    <td>MAC</td>
+                                    <td>{{seek_itzc.mac}}</td>
+                                </tr>
+                                <tr>
+                                    <td>操作系统</td>
+                                    <td>{{seek_itzc.操作系统}}</td>
+                                </tr>
+                                <tr>
+                                    <td>备注</td>
+                                    <td>{{seek_itzc.备注}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                                {% else %}
+                                    <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                {% if lc设备 == '电脑端' %}
+                                    <th width=300px>此使用人其他设备</th>
+                                {% else %}
+                                    <th width=100px>此使用人其他设备</th>
+                                {% endif  %}
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>资产编号</td>
+                                    <td>{{seek_itzc.资产编号}}</td>
+                                </tr>
+                                <tr>
+                                    <td>资产名称</td>
+                                    <td>{{seek_itzc.资产名称}}</td>
+                                </tr>
+                                <tr>
+                                    <td>资产类型</td>
+                                    <td>{{seek_itzc.资产类型}}</td>
+                                </tr>
+                                <tr>
+                                    <td>区域</td>
+                                    <td>{{seek_itzc.区域}}</td>
+                                </tr>
+                                <tr>
+                                    <td>位置</td>
+                                    <td>{{seek_itzc.位置}}</td>
+                                </tr>
+                                <tr>
+                                    <td>使用人</td>
+                                    <td>{{seek_itzc.使用人}}</td>
+                                </tr>
+                                <tr>
+                                    <td>使用状态</td>
+                                    <td>{{seek_itzc.使用状态}}</td>
+                                </tr>
+                                <tr>
+                                    <td>主板</td>
+                                    <td>{{seek_itzc.主板}}</td>
+                                </tr>
+                                <tr>
+                                    <td>操作系统</td>
+                                    <td>{{seek_itzc.操作系统}}</td>
+                                </tr>
+                                <tr>
+                                    <td>备注</td>
+                                    <td>{{seek_itzc.备注}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="tab1_2">
+                            <div class="wrapper wrapper-content animated fadeInRight">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="ibox ">
+                                            <div class="ibox-title">
+                                                <h5>条形图</h5>
+                                            </div>
+                                            <div class="ibox-content">
+                                                <div>
+                                                    <canvas id="barChart" height="140"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+        </div>
+    </div>
+    {% if lc错误 %}
+    <script>
+        alert('无此编码或编码错误')
+        window.location.href=".."
+    </script>
+    {% endif %}
+
+    <!-- Mainly scripts -->
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+
+    <!-- Custom and plugin javascript -->
+    <script src="/static/js/inspinia.js"></script>
+    <script src="/static/js/plugins/pace/pace.min.js"></script>
+
+    <!-- ChartJS-->
+    <script src="/static/js/plugins/chartJs/Chart.min.js"></script>
+<!--    <script src="/static/js/demo/chartjs-demo.js"></script>-->
+
+
+    <script>
+        $(document).ready(function(){
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function(){
+
+          $(".tab1_2").hide();
+          $(".tab1_3").hide();
+
+          $(".tabs1").click(function(){
+            $(".tab1_1").show();
+            $(".tab1_2").hide();
+            $(".ibox-title").show();
+            });
+          $(".tabs2").click(function(){
+            $(".tab1_1").hide();
+            $(".tab1_2").show();
+            $(".ibox-title").hide();
+           });
+           $(".tabs3").click(function(){
+            $(".tab1_1").hide();
+            $(".tab1_2").hide();
+            $(".tab1_3").show();
+           });
+
+         $('#txtName').on('click', function() {
+             $(' table tbody tr').hide()
+                 .filter(":contains('" + ($('#filterName').val()) + "')")
+                 .show();
+         })
+         $('#click2').on('click', function() {
+            $(".tab1_2").hide();
+         })
+
+        });
+
+
+
+    </script>
+
+    <script>
+        function refer(){
+                var a = $('#text').val();//输入框内容
+                var b = $('#area').val();//区域内容
+                var c = $('#type').val();//类型内容
+
+                if(b !='选择区域' & c !='选择类型'){
+                    a= b + c + a
+                    console.log(a)
+                }
+
+                if(b !='选择区域' & c =='选择类型'){
+                    a= b + a
+                    console.log(a)
+                }
+
+                var post_data ={
+                    'a': a,
+                };
+                $.ajax({
+                    url:'', //   ../输入地址，可不输入
+                    type:'POST',
+                    data:{"data":post_data},
+                    dataType:'json',
+                    success: function(data){
+                           if(data['status']){
+                           //"window.location.href"、"location.href"是本页面bai跳转du
+                           //"parent.location.href"是上一层页面跳转
+                           //"top.location.href"是最外层的页面跳转
+                              window.location.href="../../IT_info/" + data['lc资产编号']
+
+                           }
+                           else{
+                               alert(data['lc资产编号'])
+                           }
+                       }
+                });
+        }
+
+
+</script>
+
+
+<!--图表-->
+    <script>
+$(function () {
+
+
+var barData = {
+        labels: [
+                {% for biaoti_lists in biaoti_list  %}
+                    '{{ biaoti_lists }}',
+                {% endfor %}
+        ],
+        datasets: [
+            {
+                label: "花都总部",
+                backgroundColor: 'rgba(221, 34, 102,0.5)',
+                borderColor: "rgba(26,179,148,0.7)",
+                pointBackgroundColor: "rgba(26,179,148,1)",
+                data: [
+                    {% for itzc_zbs in itzc_zb %}
+                        '{{ itzc_zbs }}',
+                    {% endfor %}
+                ]
+            },
+            {
+                label: "白云运营",
+                backgroundColor: 'rgba(26,179,148,0.5)',
+                borderColor: "rgba(26,179,148,0.7)",
+                pointBackgroundColor: "rgba(26,179,148,1)",
+                pointBorderColor: "#fff",
+                data: [
+                     {% for itzc_bys in itzc_by %}
+                        '{{ itzc_bys }}',
+                    {% endfor %}
+                ]
+            },
+             {
+                label: "总部机房",
+                backgroundColor: 'rgba(150, 236, 252, 0.7)',
+                borderColor: "rgba(150, 236, 252, 0.7)",
+                pointBackgroundColor: "rgba(150, 236, 252, 0.7)",
+                pointBorderColor: "#fff",
+                data: [
+                     {% for itzc_jfs in itzc_jf %}
+                        '{{ itzc_jfs }}',
+                    {% endfor %}
+                ]
+            },
+        ]
+    };
+
+    var barOptions = {
+        responsive: true
+    };
+
+
+    var ctx2 = document.getElementById("barChart").getContext("2d");
+    new Chart(ctx2, {type: 'bar', data: barData, options:barOptions});
+
+
+
+});
+</script>
+
+</body>
+</html>
